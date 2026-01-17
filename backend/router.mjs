@@ -8,6 +8,6 @@ export class Router{
         this.routes['GET'][route] = handler;
     }
     post(route,handler){
-        this.routes['GET'][route] = handler;
+        this.routes['POST'][route] = handler;
     }
 }
