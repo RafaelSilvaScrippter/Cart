@@ -2,32 +2,56 @@ import { createServer } from "node:http";
 import { Router } from "./router.mjs";
 import { customRequest } from "./custom-request.mjs";
 import { customResponse } from "./customResponse.mjs";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import { readFile } from "node:fs/promises";
 
-const router = new Router()
-function getProdutos(){
-    console.log('hello world')
-}
-function postProdutos(req,res){
-    console.log('hello world post')
-    console.log(req.body)
-    res.status(200).json({nome:"Rafael"})
-}
-router.get('/produtos',getProdutos)
-router.post('/produtos',postProdutos)
+const router = new Router();
 
-const server = createServer(async(request,response) =>{
-    const req = await customRequest(request)
-    const res = customResponse(response)
-    const handler = router.routes[req.method][req.pathname]
 
-    if(handler){
-        handler(req,res)
-    }else{
-        console.log('nenhuma rota encontrada')
-    }
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-})
 
-server.listen(3001,() =>{
-    console.log('servidor rodando na porta 3000')
-})
+const publicDir = path.join(__dirname, "../front");
+
+const mimeTypes = {
+  ".html": "text/html",
+  ".js": "application/javascript",
+  ".mjs": "application/javascript",
+  ".css": "text/css",
+  ".json": "application/json",
+};
+
+const server = createServer(async (request, response) => {
+  const req = await customRequest(request);
+  const res = customResponse(response);
+
+
+  const handler = router.routes?.[req.method]?.[req.pathname];
+  if (handler) {
+    return handler(req, res);
+  }
+
+
+  const filePath =
+    req.pathname === "/"
+      ? path.join(publicDir, "index.html")
+      : path.join(publicDir, req.pathname);
+
+  const extArquivo = path.extname(filePath);
+  const contentType = mimeTypes[extArquivo] || "text/plain";
+
+  try {
+    const content = await readFile(filePath);
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(content);
+  } catch {
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end("Arquivo não encontrado");
+  }
+});
+
+server.listen(3001, () => {
+  console.log("Servidor rodando em http://localhost:3001");
+});
