@@ -1,0 +1,89 @@
+.carrinho{
+    padding: 22px 32px;
+    align-self: start;
+    background-color: #f7f7f7;
+    display: grid;
+    border-radius: 16px;
+}
+
+.titulo-cart{
+    margin-bottom: 22px;
+    color: #c73a0fff;
+}
+
+.titulo-produto{
+    color: #260f08ff;
+    font-weight: 900;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.conteudo-cart{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.data-conteudo-produtos{
+    margin-bottom: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f4edebff;
+}
+
+.valor{
+    color:#c9aea6ff;
+}
+
+.total-cada{
+    color: #ad8985ff;
+    font-weight: 600;
+}
+
+.container-conteudo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quantidade{
+    color: #c73a0fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.remover-produto{
+    border-radius: 50%;
+    border: 1px solid #c9aea6ff;
+    padding: 2px;
+}
+.total-soma-produtos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0px;
+}
+
+.total{
+    color: #260f08ff;
+    font-weight: bold;
+}
+
+.card-message{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 8px;
+    padding: 12px 22px;
+    margin-top: 22px;
+    font-size: 13px;
+    background-color: #f4edebff;
+}
+
+.botao-cart-comprar{
+    padding: 12px 24px;
+    background-color: #c73a0fff;
+    border: none;
+    margin-top: 22px;
+    border-radius: 12px;
+    color: #f7f7f7;
+}

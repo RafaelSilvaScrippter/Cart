@@ -11,8 +11,36 @@
 </head>
 <body>
     <main class="main">
-        <h1 class="titulo">Cart</h1>
-        <div data-conteudo-produtos class="container-produtos"></div>
+        <div data-conteudo-produtos class="container-produtos">
+            <h1 class="titulo">Cart</h1>
+
+        </div>
+        <div data-carrinho class="carrinho">
+            <h2 class="titulo-cart">Your cart <span data-total-produtos>(9)</span></h2>
+            <div class="data-conteudo-produtos">
+                <p class="titulo-produto">Classic tiramissu</p>
+                <div class="container-conteudo">
+                    <div class="conteudo-cart">
+                        <p data-quantidade class="quantidade">1x</p>
+                        <p class="valor">@ $5.50</p>
+                        <p class="total-cada">$5.50</p>
+                    </div>
+                    <div data-remover class="remover-produto">
+
+                        <img src="./produtos/icon-remove-item.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div data-total-preco-compras class="total-soma-produtos">
+                <p>Order Total</p>
+                <h3 class="total">$46.90</h3>
+            </div>
+            <div class="card-message">
+                <img src="./produtos/icon-carbon-neutral.svg" alt="Icone carbon neutral">
+                <p>This a <b>carbon-neutral</b> delivery</p>
+            </div>
+            <button data-finalizar class="botao-cart-comprar">Confirm Order</button>
+        </div>
     </main>
     <script type="module" src="./script.js"></script>
 </body>
