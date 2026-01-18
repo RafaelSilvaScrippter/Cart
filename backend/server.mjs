@@ -5,9 +5,11 @@ import { customResponse } from "./customResponse.mjs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
+import { getProdutos } from "./produtos/query.mjs";
 
 const router = new Router();
 
+router.get('/produtos',getProdutos)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +23,10 @@ const mimeTypes = {
   ".mjs": "application/javascript",
   ".css": "text/css",
   ".json": "application/json",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".gif": "image/gif",
+  ".svg": "image/svg+xml"
 };
 
 const server = createServer(async (request, response) => {

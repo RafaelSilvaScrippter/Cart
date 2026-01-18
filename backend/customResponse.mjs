@@ -4,7 +4,7 @@ export function customResponse(res){
         return res
     };
     res.json = (value) =>{
-        res.end(JSON.stringify(value))
+         res.end(JSON.stringify(value))
     }
     return res
 }
