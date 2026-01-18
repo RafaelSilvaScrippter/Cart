@@ -1,1 +1,3 @@
-alert('hello world')
+import fetchProdutos from "./fetchProdutos.js";
+
+fetchProdutos()
