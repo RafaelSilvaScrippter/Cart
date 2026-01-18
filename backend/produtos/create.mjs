@@ -4,6 +4,7 @@ const createProducts = db.exec(`CREATE TABLE IF NOT EXISTS "produtos" (
     "id"INTEGER PRIMARY KEY,
     "slug" TEXT NOT NULL,
     "nome"TEXT NOT NULL,
+    "src" TEXT NOT NULL,
     "preco"INTEGER NOT NULL
     )`)
 
