@@ -1,3 +1,3 @@
-import fetchProdutos from "./fetchProdutos.js";
+import fetchProdutos from "./script/fetchProdutos.js";
 
 fetchProdutos()
