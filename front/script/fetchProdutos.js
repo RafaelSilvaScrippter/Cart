@@ -1,7 +1,8 @@
 import { moedaTransformar } from "./currencyLocal.js"
+export async function fetchProdutos(){
 
-const dataConteudoProdutos = document.querySelector('[data-conteudo-produtos]')
-
+    const dataConteudoProdutos = document.querySelector('[data-conteudo-produtos]')
+    
 const response = await fetch('http://localhost:3001/produtos')
 const dados = await response.json()
 
@@ -19,4 +20,4 @@ dados.forEach((produto) =>{
     `
 })
 
-export default fetchDados = {}
+}
