@@ -5,12 +5,13 @@ import { customResponse } from "./customResponse.mjs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
-import { getProdutos, postCart } from "./produtos/query.mjs";
+import { getProductsCart, getProdutos, postCart } from "./produtos/query.mjs";
 
 const router = new Router();
 
 router.get('/produtos',getProdutos)
 router.post('/produtos',postCart)
+router.get('/produtos/cart',getProductsCart)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

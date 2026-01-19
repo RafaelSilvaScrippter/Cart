@@ -22,7 +22,7 @@ export function postCart(req,res){
 
   const getProduct = db.prepare(`SELECT * FROM "cart" WHERE "slug" = ?`).get(slug);
 
-  if(getProduct.quanty === 0){
+  if(getProduct && getProduct.quanty === 0){
     db.prepare(`DELETE  FROM "cart" WHERE "slug" = ?`).run(slug)
     return
   }
@@ -58,4 +58,10 @@ export function postCart(req,res){
     console.log('erro ao atualizar')
     }
   }
+}
+
+export function getProductsCart(req,res){
+  const getProducts = db.prepare(`SELECT * FROM "cart" JOIN "produtos" ON "product_id" = "produtos"."id"  `).all();
+  console.log(getProducts)
+  res.status(200).json(getProducts)
 }
