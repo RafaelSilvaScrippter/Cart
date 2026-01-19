@@ -1,3 +1,5 @@
+import { moedaTransformar } from "./currencyLocal.js"
+
 const dataConteudoProdutos = document.querySelector('[data-conteudo-produtos]')
 
 const response = await fetch('http://localhost:3001/produtos')
@@ -12,7 +14,7 @@ dados.forEach((produto) =>{
         </div>
         <span class='produto-categoria'>${produto.slug}</span>
         <h2 class='produto-nome'>${produto.nome}</h2>
-        <p class='produto-preco'>${produto.preco}</p>
+        <p class='produto-preco'>${moedaTransformar( produto.preco)}</p>
     </div>
     `
 })
