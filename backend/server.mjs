@@ -5,13 +5,14 @@ import { customResponse } from "./customResponse.mjs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
-import { getProductsCart, getProdutos, postCart } from "./produtos/query.mjs";
+import { deleteProductCart, getProductsCart, getProdutos, postCart } from "./produtos/query.mjs";
 
 const router = new Router();
 
 router.get('/produtos',getProdutos)
 router.post('/produtos',postCart)
 router.get('/produtos/cart',getProductsCart)
+router.get('/produtos/cart/delete',deleteProductCart)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,7 +49,7 @@ const server = createServer(async (request, response) => {
       : path.join(publicDir, req.pathname);
 
   const extArquivo = path.extname(filePath);
-  const contentType = mimeTypes[extArquivo] || "text/plain";
+  const contentType = mimeTypes[extArquivo] || "'text/plain; charset=utf-8'";
 
   try {
     const content = await readFile(filePath);
