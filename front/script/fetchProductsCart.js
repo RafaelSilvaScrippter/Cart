@@ -1,4 +1,5 @@
 import { moedaTransformar } from "./currencyLocal.js"
+import { deleteProduto } from "./deleteProduto.js"
 
 export async function getProductsCart(){
 
@@ -18,19 +19,18 @@ export async function getProductsCart(){
         dataTotal.innerText = `${moedaTransformar(total)}`
     }
     somarTotalDeTodasAsCompras()
-
     dataTotalProdutos.innerText = `(${dados.length})`
+
     dados.map((item) =>{
         dataProductCart.innerHTML += /*html */ `
-        
          <p class="titulo-produto">${item.nome}</p>
-                <div class="container-conteudo">
+                <div data-container-conteudo class="container-conteudo">
                     <div class="conteudo-cart">
                         <p data-quantidade class="quantidade">${item.quanty}x</p>
                         <p class="valor">@${item.preco}</p>
                         <p class="total-cada">$${item.preco * item.quanty}</p>
                     </div>
-                    <div data-remover class="remover-produto">
+                    <div data-remover='${item.id}' class="remover-produto">
 
                         <img src="./produtos/icon-remove-item.svg" alt="">
                     </div>
@@ -38,4 +38,6 @@ export async function getProductsCart(){
 
         `
     })
+    const remover = dataProductCart.querySelectorAll('[data-remover]')
+    deleteProduto(remover)
 }

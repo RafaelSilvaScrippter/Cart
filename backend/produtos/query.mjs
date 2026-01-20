@@ -63,7 +63,7 @@ export function postCart(req,res){
 export function getProductsCart(req,res){
   try{
 
-    const getProducts = db.prepare(`SELECT * FROM "cart" JOIN "produtos" ON "product_id" = "produtos"."id"  `).all();
+    const getProducts = db.prepare(`SELECT *,"c"."id" FROM "cart" AS "c" JOIN "produtos" ON "product_id" = "produtos"."id"  `).all();
     
     res.status(200).json(getProducts)
   }catch{
@@ -72,7 +72,8 @@ export function getProductsCart(req,res){
 }
 
 export function deleteProductCart(req,res){
-  const id = 2
+  console.log(req.body)
+  const {id} = req.body
   if(!id){
   
     return  res.status(404).json({status:404,message:"Id do produto não fornecido"})
@@ -89,7 +90,7 @@ export function deleteProductCart(req,res){
   }
 
   try{
-    const deleteDb = db.prepare(`DELETE  FROM "cart" WHERE "id" = ?`).run(2)
+    const deleteDb = db.prepare(`DELETE  FROM "cart" WHERE "id" = ?`).run(id)
     if(deleteDb.changes === 1){
        res.status(200).json({message:"Produto deletado"})
     }

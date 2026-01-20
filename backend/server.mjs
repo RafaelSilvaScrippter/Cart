@@ -12,7 +12,7 @@ const router = new Router();
 router.get('/produtos',getProdutos)
 router.post('/produtos',postCart)
 router.get('/produtos/cart',getProductsCart)
-router.get('/produtos/cart/delete',deleteProductCart)
+router.delete('/produtos/cart/delete',deleteProductCart)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,7 +49,7 @@ const server = createServer(async (request, response) => {
       : path.join(publicDir, req.pathname);
 
   const extArquivo = path.extname(filePath);
-  const contentType = mimeTypes[extArquivo] || "'text/plain; charset=utf-8'";
+  const contentType = mimeTypes[extArquivo] || "text/plain; application/json";
 
   try {
     const content = await readFile(filePath);
