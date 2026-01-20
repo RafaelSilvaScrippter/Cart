@@ -70,3 +70,31 @@ export function getProductsCart(req,res){
     res.status(404).json({status:404,message:"Produto não encontrado"})
   }
 }
+
+export function deleteProductCart(req,res){
+  const id = 2
+  if(!id){
+  
+    return  res.status(404).json({status:404,message:"Id do produto não fornecido"})
+  }
+
+  try{
+
+    const verificarSeProdutoExiste = db.prepare(`SELECT * FROM "cart" WHERE "id" = ?`).get(id)
+    if(!verificarSeProdutoExiste){
+       return  res.status(404).json({status:404,message:"Produto não encontrado"})
+    }
+  }catch{
+    res.status(500).json({message:"Erro no servidor"})
+  }
+
+  try{
+    const deleteDb = db.prepare(`DELETE  FROM "cart" WHERE "id" = ?`).run(2)
+    if(deleteDb.changes === 1){
+       res.status(200).json({message:"Produto deletado"})
+    }
+  }catch{
+     res.status(500).json({message:"Erro no servidor"})
+  }
+  
+}
