@@ -54,6 +54,7 @@
 .remover-produto{
     border-radius: 50%;
     border: 1px solid #c9aea6ff;
+    cursor: pointer;
     padding: 2px;
 }
 .total-soma-produtos{
