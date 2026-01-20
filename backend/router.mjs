@@ -1,7 +1,8 @@
 export class Router{
     routes = {
         GET:{},
-        POST:{}
+        POST:{},
+        DELETE:{}
     }
 
     get(route,handler){
@@ -9,5 +10,8 @@ export class Router{
     }
     post(route,handler){
         this.routes['POST'][route] = handler;
+    }
+    delete(route,handler){
+        this.routes['DELETE'][route] = handler;
     }
 }
