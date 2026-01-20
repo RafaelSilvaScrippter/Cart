@@ -61,7 +61,12 @@ export function postCart(req,res){
 }
 
 export function getProductsCart(req,res){
-  const getProducts = db.prepare(`SELECT * FROM "cart" JOIN "produtos" ON "product_id" = "produtos"."id"  `).all();
-  console.log(getProducts)
-  res.status(200).json(getProducts)
+  try{
+
+    const getProducts = db.prepare(`SELECT * FROM "cart" JOIN "produtos" ON "product_id" = "produtos"."id"  `).all();
+    
+    res.status(200).json(getProducts)
+  }catch{
+    res.status(404).json({status:404,message:"Produto não encontrado"})
+  }
 }
