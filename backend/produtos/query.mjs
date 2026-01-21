@@ -27,12 +27,13 @@ export function postCart(req,res){
     return
   }
 
-  console.log(getProduct)
   if(!getProduct){
+    console.log('get product')
     try{
       const insertCart = db.prepare(`INSERT  INTO "cart" ("slug","product_id","quanty") 
       VALUES(?,?,?)
     ` ).run(slug,product_id,1)
+    res.status(201).json({message:'Produto adicionado'})
     }catch{
     console.log('erro')
     }
@@ -54,6 +55,7 @@ export function postCart(req,res){
       "quanty" = excluded.quanty
     ` ).run(slug,product_id,total)
     console.log(insertCart)
+    res.status(201).json({message:"Produto adicionado no carrinho"})
     }catch{
     console.log('erro ao atualizar')
     }

@@ -2,15 +2,11 @@ import { moedaTransformar } from "./currencyLocal.js"
 import { deleteProduto } from "./deleteProduto.js"
 
 export async function getProductsCart(){
-
     const dataProductCart = document.querySelector('[data-product-cart]')
     const dataTotalProdutos = document.querySelector('[data-total-produtos]')
     const dataTotal = document.querySelector('[data-total]')
 
-    const response = await fetch(`http://localhost:3001/produtos/cart`,{
-        method:"GET",
-        
-    })
+    const response = await fetch(`http://localhost:3001/produtos/cart`)
     const dados = await response.json()
     function somarTotalDeTodasAsCompras(){
         const total = dados.reduce((acc,acm) => {

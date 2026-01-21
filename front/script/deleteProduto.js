@@ -8,7 +8,6 @@ export async function deleteProduto(removerElemento){
         })
     })
     async function remover(id){
-        console.log(id)
         try{
 
             const response = await fetch('http://localhost:3001/produtos/cart/delete',{
