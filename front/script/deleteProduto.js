@@ -1,4 +1,5 @@
 import { getProductsCart } from "./fetchProductsCart.js"
+import { fetchProdutos } from "./fetchProdutos.js"
 
 export async function deleteProduto(removerElemento){
     removerElemento.forEach((item,index) =>{
@@ -22,6 +23,7 @@ export async function deleteProduto(removerElemento){
             console.log('Erro ao deletar o produto')
         }finally{
             getProductsCart()
+            await fetchProdutos()
         }
     }
 }

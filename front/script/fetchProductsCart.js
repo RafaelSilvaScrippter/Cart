@@ -8,6 +8,7 @@ export async function getProductsCart(){
 
     const response = await fetch(`http://localhost:3001/produtos/cart`)
     const dados = await response.json()
+    console.log(dados)
     function somarTotalDeTodasAsCompras(){
         const total = dados.reduce((acc,acm) => {
             return acc += (acm.preco * acm.quanty)

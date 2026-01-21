@@ -19,6 +19,26 @@
     content: url("../produtos/icon-add-to-cart.svg");
 }
 
+
+.remover-div {
+    border: 1px solid #f7f7f7;
+   width: 10px;
+   height: 10px;
+   padding: 3px;
+   display: flex;
+   align-items: center;
+   border-radius: 50%;
+}
+
+.none-cart::before{
+    content: none;
+}
+
+.none-cart{
+    color: #f7f7f7;
+    background-color: #c73a0fff;
+}
+
 .card-img{
     position: relative;
     display: grid;

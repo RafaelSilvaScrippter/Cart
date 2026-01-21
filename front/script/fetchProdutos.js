@@ -7,13 +7,29 @@ export async function fetchProdutos(){
 const response = await fetch('http://localhost:3001/produtos')
 const dados = await response.json()
 
-console.log(dados)
-dados.forEach((produto) =>{
+dataConteudoProdutos.innerHTML = ''
+
+dados.forEach((produto,index) =>{
     dataConteudoProdutos.innerHTML += /*HTML */ `
     <div class='data-card-produto'>
         <div class='card-img'>
             <img src='./produtos/${produto.src}' alt='foto do produto ${produto.nome}' />
-            <button data-adicionar-produto data-slug='${produto.slug}' data-id='${produto.id}' class='btn-cart'>Add to cart</button>
+            ${!produto.quanty ? `
+            <button data-adicionar-produto data-slug='${produto.slug}' data-id='${produto.id}' class='btn-cart'>Add to cart</button> `: `
+            <button  class='btn-cart none-cart'>
+            <div data-adicionar-produto data-slug='${produto.slug}' data-id='${produto.id}' data-metodo='rmv' class='remover-div'>
+                <img src='./produtos/iconDiminuir.svg' />
+            </div>
+
+            ${produto.quanty}
+            <div data-adicionar-produto data-slug='${produto.slug}' data-id='${produto.id}' data-metodo='add'  class='remover-div' >
+                <img src='./produtos/iconAumentar.svg' />
+            </div>
+            
+            </button> 
+            `
+                
+            }
         </div>
         <span class='produto-categoria'>${produto.slug}</span>
         <h2 class='produto-nome'>${produto.nome}</h2>

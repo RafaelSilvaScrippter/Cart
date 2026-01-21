@@ -2,7 +2,7 @@
 import { db } from "../db/database.mjs";
 
 export  function getProdutos(req,res){
-   const getProdutos = db.prepare(`SELECT * FROM "produtos"`).all()
+   const getProdutos = db.prepare(/*sql */`SELECT "produtos".*,"cart"."quanty" FROM "produtos" LEFT JOIN "cart" ON "cart"."product_id" = "produtos"."id"`).all()
   if(!getProdutos){
     try{
         
@@ -22,44 +22,47 @@ export function postCart(req,res){
 
   const getProduct = db.prepare(`SELECT * FROM "cart" WHERE "slug" = ?`).get(slug);
 
-  if(getProduct && getProduct.quanty === 0){
-    db.prepare(`DELETE  FROM "cart" WHERE "slug" = ?`).run(slug)
-    return
-  }
 
   if(!getProduct){
-    console.log('get product')
     try{
-      const insertCart = db.prepare(`INSERT  INTO "cart" ("slug","product_id","quanty") 
+      const insertCart = db.prepare(/*sql */`INSERT  INTO "cart" ("slug","product_id","quanty") 
       VALUES(?,?,?)
     ` ).run(slug,product_id,1)
     res.status(201).json({message:'Produto adicionado'})
     }catch{
+    res.status(500).json({message:'erro'})
     console.log('erro')
     }
-  }else{
-    let total
+  }
+
+  if(getProduct && getProduct.quanty >= 1){
+    let total = getProduct.quanty
     if(metodo === 'add'){
-
-       total = getProduct.quanty + 1
+      total++
+    }else{
+      total--
     }
-
-    if(metodo === 'rmv'){
-      total = getProduct.quanty - 1
-    }
-    try{
+      try{
       const insertCart = db.prepare(`INSERT  INTO "cart" ("slug","product_id","quanty") 
       VALUES(?,?,?)
       ON CONFLICT ("slug","product_id")
       DO UPDATE SET 
       "quanty" = excluded.quanty
     ` ).run(slug,product_id,total)
-    console.log(insertCart)
     res.status(201).json({message:"Produto adicionado no carrinho"})
     }catch{
-    console.log('erro ao atualizar')
+    console.log('erro')
+    res.status(500).json({message:"erro"})
+    }finally{
+
+    if(getProduct && getProduct.quanty === 1 && metodo !== 'add'){
+       db.prepare(`DELETE  FROM "cart" WHERE "slug" = ?`).run(slug)
+      return
+  
     }
   }
+  }
+  
 }
 
 export function getProductsCart(req,res){
