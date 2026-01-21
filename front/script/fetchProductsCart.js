@@ -20,7 +20,7 @@ export async function getProductsCart(){
     }
     somarTotalDeTodasAsCompras()
     dataTotalProdutos.innerText = `(${dados.length})`
-
+    dataProductCart.innerHTML = ''
     dados.map((item) =>{
         dataProductCart.innerHTML += /*html */ `
          <p class="titulo-produto">${item.nome}</p>

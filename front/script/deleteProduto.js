@@ -19,11 +19,10 @@ export async function deleteProduto(removerElemento){
                 body:JSON.stringify({id:id})
             })
             const dados = await response.json()
-            if(response.status === 200){
-                window.location.reload()
-            }
         }catch{
             console.log('Erro ao deletar o produto')
+        }finally{
+            getProductsCart()
         }
     }
 }
