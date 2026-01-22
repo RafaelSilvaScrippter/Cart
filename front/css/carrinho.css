@@ -6,6 +6,14 @@
     border-radius: 16px;
 }
 
+.paragrafo-cart-empty{
+    color: #87635aff;
+}
+
+.imagem-empty{
+    margin: 0 auto;
+}
+
 .titulo-cart{
     margin-bottom: 22px;
     color: #c73a0fff;
