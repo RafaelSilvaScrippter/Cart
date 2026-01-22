@@ -17,18 +17,22 @@
         </div>
         <div data-carrinho class="carrinho">
             <h2 class="titulo-cart">Your cart <span data-total-produtos></span></h2>
-            <div data-product-cart class="data-conteudo-produtos">
+            <div data-cart-empty-img>
+                <img  class="imagem-empty" src="./produtos/illustration-empty-cart.svg" alt="Imagem empty cart">
+                <p class="paragrafo-cart-empty">Your added items will appear here</p>
+            </div>
+            <div data-none="block" data-product-cart class="data-conteudo-produtos">
                
             </div>
-            <div data-total-preco-compras class="total-soma-produtos">
+            <div data-none="flex" data-total-preco-compras class="total-soma-produtos">
                 <p>Order Total</p>
                 <h3 data-total class="total">$00</h3>
             </div>
-            <div class="card-message">
+            <div data-none='flex' class="card-message">
                 <img src="./produtos/icon-carbon-neutral.svg" alt="Icone carbon neutral">
                 <p>This a <b>carbon-neutral</b> delivery</p>
             </div>
-            <button data-finalizar class="botao-cart-comprar">Confirm Order</button>
+            <button data-none="block" data-finalizar class="botao-cart-comprar">Confirm Order</button>
         </div>
     </main>
     <script type="module" src="./script.js"></script>

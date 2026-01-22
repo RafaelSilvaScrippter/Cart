@@ -5,10 +5,22 @@ export async function getProductsCart(){
     const dataProductCart = document.querySelector('[data-product-cart]')
     const dataTotalProdutos = document.querySelector('[data-total-produtos]')
     const dataTotal = document.querySelector('[data-total]')
-
+    const dataCartEmptyImg = document.querySelector('[data-cart-empty-img]')
+    const dataNoneCartEmpty = document.querySelectorAll('[data-none]')
     const response = await fetch(`http://localhost:3001/produtos/cart`)
     const dados = await response.json()
     console.log(dados)
+    if(dados.length === 0){
+       dataNoneCartEmpty.forEach((item) =>{
+        item.style.display = 'none'
+       })
+       dataCartEmptyImg.style.display = 'block'
+    }else{
+        dataNoneCartEmpty.forEach((item) =>{
+        item.style.display =  item.dataset.none
+       })
+        dataCartEmptyImg.style.display = 'none'
+    }
     function somarTotalDeTodasAsCompras(){
         const total = dados.reduce((acc,acm) => {
             return acc += (acm.preco * acm.quanty)
